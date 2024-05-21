@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>оформление заказа</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+ <h2>Введите номер заказа:</h2>
+    <form action="/submit_order" method="post">
+        <input type="text" name="order_number" placeholder="Номер заказа"><br><br>
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+{% endblock %}
