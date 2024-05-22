@@ -115,6 +115,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/Dobavit')
+def Dobavit():
+    return render_template('Dobavit.html')
+
+
 @app.route('/laptops')
 def laptops():
     laptop = Laptops.query.order_by(Laptops.price).all()
@@ -127,7 +132,7 @@ def adress():
     return render_template('adress.html')
 
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login_page', methods=['GET','POST'])
 def login_page():
     login = request.form.get('login')
     password = request.form.get('password')
@@ -138,14 +143,12 @@ def login_page():
         if user and check_password_hash(user.password, password):
             login_user(user)
 
-            next_page = request.args.get('next')
-
-            redirect(next_page)
+            return redirect('/')
         else:
             flash('Неправильно введен логин или пароль')
     else:
         flash('Введите логин и пароль')
-    render_template('login.html')
+    return render_template('login_page.html')
 
 
 @app.route('/logout', methods=['GET','POST'])
@@ -172,7 +175,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
 
-            return redirect('/login')
+            return redirect('/login_page')
     return render_template('register.html')
 
 
@@ -185,7 +188,6 @@ def register():
 
 # добавление элементов в бд
 @app.route('/create', methods=['POST', 'GET'])
-@login_required
 def create():
     if request.method == "POST":
         title = request.form['title']
