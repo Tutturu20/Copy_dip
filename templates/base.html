@@ -13,35 +13,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/send.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% block title %}{% endblock %}
 </head>
 <header data-bs-theme="white">
-  <div class="collapse text-bg-dark" id="navbarHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4>About</h4>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4>Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="#" class="text-white">Like on Facebook</a></li>
-            <li><a href="#" class="text-white">Email me</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <nav class="navbar">
     <div class="container">
         <a href="/" class="navbar-brand">LOGO</a>
         <div class="navbar-wrap">
             <ul class="navbar-menu">
-            <li><a href="/about">О нас</a></li>
-            <li><a href="/login_page">Авторизация</a></li>
-            <li><a href="/register">Регистрация</a></li>
-            <li><a href="#" class="dropdown-toggle" easy-toggle="#dropdown" easy-class="show" easy-rcoe>Каталог</a></li>
                 <li class="dropdown">
                     <div id="dropdown" class="dropdown-menu">
                         <a href="/laptops" class="dropdown-link">ноутбуки</a>
@@ -52,10 +33,13 @@
                         <a href="#" class="dropdown-link">Процессоры</a>
                     </div>
                 </li>
+            <li><a href="/about">О нас</a></li>
+            <li><a href="#" class="dropdown-toggle" easy-toggle="#dropdown" easy-class="show" easy-rcoe>Каталог</a></li>
+
             <li><a href="/help">Помощь</a></li>
             <li><a href="/adress">Адреса</a></li>
         </ul>
-        <a href="#" class="callback">8-800-555-35-35</a>
+        <a href="/login_page" class="callback">Авторизация</a>
         </div>
     </div>
 </nav>
@@ -76,7 +60,7 @@
       <ul>
         <li><a href="/about">О магазине</a></li>
         <li><a href="/register">Добавить</a></li>
-        <li><a href="#">Условия использования</a></li>
+        <li><a href="/create">Добавить</a></li>
         <li><a href="#">Политика конфиденциальности</a></li>
       </ul>
     </div>
@@ -84,11 +68,11 @@
 
     </div>
     <div class="footer-column">
-      <h3>Следите за нами</h3>
+      <h3>Наши контакты</h3>
       <ul class="social-media-icons">
-        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li>VK: <a href="https://vk.com/kiber_pechenie">https://vk.com/kiber_pechenie<i class="fab fa-facebook-f"></i></a></li>
+        <li>Почта: <a href="#">timyrbylat0309@gmail.com<i class="fab fa-twitter"></i></a></li>
+        <li>Номер: <a href="#">85-85-90<i class="fab fa-instagram"></i></a></li>
       </ul>
     </div>
   </div>

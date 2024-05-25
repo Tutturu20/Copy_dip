@@ -46,15 +46,13 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container mt-5">
       <div class="row">
-          <h3>Системные блоки</h3>
+          <a href="#" class="catalog">Системные блоки</a>
         {% for el in Pc %}
          <div class="col-md-4">
             <div class="product">
                 <div class="image">
                     <img src="{{ el.image }}" alt="">
                 </div>
-
-
                 <div class="info">
                     <h3>{{ el.title }}</h3>
                     <div class="info-price">
@@ -64,19 +62,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
-          <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
         {% endfor %}
-          <h3>Радио</h3>
+          <a href="#" class="catalog">Радио</a>
           {% for el in Radio %}
          <div class="col-md-4">
             <div class="product">
                 <div class="image">
                     <img src="{{ el.image }}" alt="https://placehold.co/300x400">
                 </div>
-
-
                 <div class="info">
                     <h3>{{ el.title }}</h3>
                     <div class="info-price">
@@ -88,9 +82,8 @@
             </div>
 
         </div>
-          <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
         {% endfor %}
-          <h3>Ноутбуки</h3>
+          <a href="/laptops" class="catalog">Ноутбуки</a>
           {% for el in Laptops %}
          <div class="col-md-4">
             <div class="product">
@@ -103,24 +96,20 @@
                     <h3>{{ el.title }}</h3>
                     <div class="info-price">
                         <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order">купить</a>
-                        <button class="add-to-cart"><ion-icon name="cart"></ion-icon></button>
+                        <a href="/submit_order" class="buy-item">купить</a>
                     </div>
                 </div>
             </div>
 
         </div>
-          <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
         {% endfor %}
-          <h3>Процессоры</h3>
+          <a href="#" class="catalog">Процессоры</a>
           {% for el in CPU %}
          <div class="col-md-4">
             <div class="product">
                 <div class="image">
                     <img src="{{ el.image }}" alt="https://placehold.co/300x400">
                 </div>
-
-
                 <div class="info">
                     <h3>{{ el.title }}</h3>
                     <div class="info-price">
@@ -130,19 +119,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
-          <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
         {% endfor %}
-          <h3>Видеокарты</h3>
+          <a href="#" class="catalog">Видеокарты</a>
           {% for el in GPU %}
          <div class="col-md-4">
             <div class="product">
                 <div class="image">
                     <img src="{{ el.image }}" alt="https://placehold.co/300x400">
                 </div>
-
-
                 <div class="info">
                     <h3>{{ el.title }}</h3>
                     <div class="info-price">
@@ -152,19 +137,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
-          <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
         {% endfor %}
-          <h3>Блоки питания</h3>
+          <a href="#" class="catalog">Блоки питания</a>
           {% for el in Block %}
          <div class="col-md-4">
             <div class="product">
                 <div class="image">
                     <img src="{{ el.image }}" alt="https://placehold.co/300x400">
                 </div>
-
-
                 <div class="info">
                     <h3>{{ el.title }}</h3>
                     <div class="info-price">
@@ -174,9 +155,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-          <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
         {% endfor %}
       </div>
     </div>
