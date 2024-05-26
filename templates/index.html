@@ -5,160 +5,34 @@
 {% endblock %}
 
 {% block body %}
-<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
-
-
 
 <main>
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container mt-5">
-      <div class="row">
-          <a href="#" class="catalog">Системные блоки</a>
-        {% for el in Pc %}
-         <div class="col-md-4">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ el.image }}" alt="">
-                </div>
-                <div class="info">
-                    <h3>{{ el.title }}</h3>
-                    <div class="info-price">
-                        <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order" class="Buy">купить</a>
-                        <button class="add-to-cart"><ion-icon name="cart"></ion-icon></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-          <a href="#" class="catalog">Радио</a>
-          {% for el in Radio %}
-         <div class="col-md-4">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ el.image }}" alt="https://placehold.co/300x400">
-                </div>
-                <div class="info">
-                    <h3>{{ el.title }}</h3>
-                    <div class="info-price">
-                        <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order">купить</a>
-                        <button class="add-to-cart"><ion-icon name="cart"></ion-icon></button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        {% endfor %}
-          <a href="/laptops" class="catalog">Ноутбуки</a>
-          {% for el in Laptops %}
-         <div class="col-md-4">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ el.image }}" alt="https://placehold.co/300x400">
-                </div>
-
-
-                <div class="info">
-                    <h3>{{ el.title }}</h3>
-                    <div class="info-price">
-                        <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order" class="buy-item">купить</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        {% endfor %}
-          <a href="#" class="catalog">Процессоры</a>
-          {% for el in CPU %}
-         <div class="col-md-4">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ el.image }}" alt="https://placehold.co/300x400">
-                </div>
-                <div class="info">
-                    <h3>{{ el.title }}</h3>
-                    <div class="info-price">
-                        <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order">купить</a>
-                        <button class="add-to-cart"><ion-icon name="cart"></ion-icon></button>
-                    </div>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container mt-5">
+                <div class="row">
+                    {% for category in categories %}
+                        <h2>{{ category.name }}</h2>
+                        <div class="row">
+                            {% for product in category.products %}
+                                <div class="col-md-4">
+                                    <div class="product">
+                                        <div class="image">
+                                            <img src="{{ product.image }}" alt="cartinka">
+                                        </div>
+                                        <div class="info">
+                                            <h3>{{ product.title }}</h3>
+                                            <div class="info-price">
+                                                <span class="price">{{ product.price }} <small>руб.</small></span>
+                                                <a href="/submit_order" class="buy-item">купить</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        {% endfor %}
-          <a href="#" class="catalog">Видеокарты</a>
-          {% for el in GPU %}
-         <div class="col-md-4">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ el.image }}" alt="https://placehold.co/300x400">
-                </div>
-                <div class="info">
-                    <h3>{{ el.title }}</h3>
-                    <div class="info-price">
-                        <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order">купить</a>
-                        <button class="add-to-cart"><ion-icon name="cart"></ion-icon></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-          <a href="#" class="catalog">Блоки питания</a>
-          {% for el in Block %}
-         <div class="col-md-4">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ el.image }}" alt="https://placehold.co/300x400">
-                </div>
-                <div class="info">
-                    <h3>{{ el.title }}</h3>
-                    <div class="info-price">
-                        <span class="price">{{ el.price }} <small>руб.</small></span>
-                        <a href="/submit_order">купить</a>
-                        <button class="add-to-cart"><ion-icon name="cart"></ion-icon></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</main>
+    </main>
 {% endblock %}

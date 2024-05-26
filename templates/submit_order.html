@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>оформление заказа</title>
+ <title>добавление товара</title>
 {% endblock %}
 
 {% block body %}
 <div class="container">
- <h2>Введите ваш заказ:</h2>
-    <form action="/submit_order" method="post">
-        <input type="text" name="order_number" placeholder="Номер заказа"><br><br>
-        <input type="submit" value="Отправить">
+    <h1>Оформление заказа</h1>
+    <form method="post">
+        <input type="text" name="name_buyer" id="name_buyer" class="form-control" placeholder="Введите ваше имя"><br>
+        <input type="number" name="number_b" id="number_b" class="form-control" placeholder="Введите ваш номер телефона"><br>
+        <input type="text" name="mail_buyer" id="mail_buyer" class="form-control" placeholder="Введите ваш E-mail"><br>
+        <button class="btn btn-success" type="submit">Заказать</button>
     </form>
 </div>
 {% endblock %}

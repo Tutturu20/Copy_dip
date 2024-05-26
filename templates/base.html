@@ -33,16 +33,29 @@
                         <a href="#" class="dropdown-link">Процессоры</a>
                     </div>
                 </li>
+
             <li><a href="/about">О нас</a></li>
             <li><a href="#" class="dropdown-toggle" easy-toggle="#dropdown" easy-class="show" easy-rcoe>Каталог</a></li>
 
             <li><a href="/help">Помощь</a></li>
             <li><a href="/adress">Адреса</a></li>
         </ul>
+            <form action="/category" method="post" class="categ">
+                <select name="category_id">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+                </select>
+                <button type="submit">Show Products</button>
+            </form>
         <a href="/login_page" class="callback">Авторизация</a>
         </div>
     </div>
 </nav>
+    <form action="/search" method="post" class="search-bar">
+        <input type="text" name="query" placeholder="Введите запрос">
+        <input type="submit" value="Поиск">
+    </form>
 </header>
 <script src="https://cdn.jsdelivr.net/npm/easy-toggler@2.2.7"></script>
 
