@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>радио и комп техника</title>
+{% endblock %}
+
+{% block body %}
+
+<main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container mt-5">
+                <div class="row">
+                    {% for product in results %}
+                        <div class="row">
+                                <div class="col-md-4">
+                                    <div class="product">
+                                        <div class="image">
+                                            <img src="{{ product.image }}" alt="cartinka">
+                                        </div>
+                                        <div class="info">
+                                            <h3>{{ product.title }}</h3>
+                                            <div class="info-price">
+                                                <span class="price">{{ product.price }} <small>руб.</small></span>
+                                                <a href="/submit_order" class="buy-item">купить</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
