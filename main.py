@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import smtplib
 from email.mime.text import MIMEText
@@ -44,9 +44,16 @@ class Orders(db.Model):
     name_buyer = db.Column(db.String(128), nullable=False)
     number_b = db.Column(db.String(50), nullable=False)
     mail_buyer = db.Column(db.String(128), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('items.id'), nullable=False)
 
     def __repr__(self):
         return self
+
+
+seller_login = "admin"
+seller_password = "qwerty"
+logged_seller = False
 
 
 @manager.user_loader
@@ -65,11 +72,6 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-
-@app.route('/Dobavit')
-def Dobavit():
-    return render_template('Dobavit.html')
 
 
 # адреса
@@ -98,24 +100,39 @@ def login_page():
 
 @app.route('/create', methods=['POST', 'GET'])
 def create():
-    if request.method == "POST":
-        title = request.form['title']
-        price = request.form['price']
-        text = request.form['text']
-        image = request.form['image']
-        category_id = int(request.form['category'])
+    if logged_seller == True:
+        if request.method == "POST":
+            title = request.form['title']
+            price = request.form['price']
+            text = request.form['text']
+            image = request.form['image']
+            category_id = int(request.form['category'])
 
-        new_items = Items(title=title, price=price, text=text, image=image, category_id=category_id)
+            new_items = Items(title=title, price=price, text=text, image=image, category_id=category_id)
 
-        try:
-            db.session.add(new_items)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "ошибка"
+            try:
+                db.session.add(new_items)
+                db.session.commit()
+                return redirect('/')
+            except:
+                return "ошибка"
+        else:
+            categories = Category.query.all()
+            return render_template('create.html', categories=categories)
     else:
-        categories = Category.query.all()
-        return render_template('create.html', categories=categories)
+        return redirect('/seller')
+
+
+@app.route('/seller', methods=['GET', 'POST'])
+def seller():
+    global logged_seller
+    if request.method == 'POST':
+        username = request.form['login']
+        password = request.form['password']
+        if username == seller_login and password == seller_password:
+            logged_seller = True
+            return redirect('/create')
+    return render_template('seller.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -125,43 +142,39 @@ def logout():
     return redirect('/')
 
 
+@app.route('/logoutsell', methods=['GET', 'POST'])
+def logoutsell():
+    global logged_seller
+    logged_seller = False
+    return redirect('/')
+
+
 @app.route("/category", methods=["POST"])
 def show_category():
     category_id = request.form.get("category_id")
     category = Category.query.get(category_id)
     products = Items.query.filter_by(category_id=category_id).all()
-    return render_template("laptops.html", category=category, products=products)
+    categories = Category.query.all()
+    return render_template("laptops.html", category=category, products=products, categories=categories)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     login = request.form.get('login')
     password = request.form.get('password')
-    password2 = request.form.get('password2')
 
     if request.method == "POST":
-        if not (login or password or password2):
-            flash('заполните все поля')
-        elif password != password2:
-            flash('пароли не совпадают')
-        else:
-            hash_pwd = generate_password_hash(password)
-            new_user = User(login=login, password=hash_pwd)
-            db.session.add(new_user)
-            db.session.commit()
+        hash_pwd = generate_password_hash(password)
+        new_user = User(login=login, password=hash_pwd)
+        db.session.add(new_user)
+        db.session.commit()
 
-            return redirect('/login_page')
+        return redirect('/')
     return render_template('register.html')
 
 
-#@app.after_request
-#def redirect_to(response):
-#    if response.status.code == 401:
-#        return redirect(url_for('login_page') + '?next=' + request.url)
-#    return response
-
-
 @app.route('/submit_order', methods=['POST', 'GET'])
+@login_required
 def submit_order():
     if request.method == "POST":
         name_buyer = request.form['name_buyer']
@@ -205,7 +218,8 @@ def help():
 def search():
     query = request.form["query"]
     results = Items.query.filter(Items.title.ilike(f"%{query}%")).all()
-    return render_template("search.html", results=results)
+    categories = Category.query.all()
+    return render_template("search.html", results=results,categories=categories)
 
 
 if __name__ == '__main__':

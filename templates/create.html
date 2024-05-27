@@ -12,7 +12,7 @@
         <input type="number" name="price" id="price" class="form-control" placeholder="Введите цену товара"><br>
         <input type="text" name="text" id="text" class="form-control" placeholder="Введите описание товара"><br>
         <input type="text" name="image" id="image" class="form-control" placeholder="Вставьте ссылку на изображение"><br>
-        <label for="category">Category:</label>
+        <label for="category">Категория:</label>
         <select id="category" name="category">
             {% for category in categories %}
                 <option value="{{ category.id }}">{{ category.name }}</option>

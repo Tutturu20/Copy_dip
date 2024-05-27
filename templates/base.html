@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/send.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reg.css') }}">
 {% block title %}{% endblock %}
 </head>
 <header data-bs-theme="white">
@@ -23,20 +24,7 @@
         <a href="/" class="navbar-brand">LOGO</a>
         <div class="navbar-wrap">
             <ul class="navbar-menu">
-                <li class="dropdown">
-                    <div id="dropdown" class="dropdown-menu">
-                        <a href="/laptops" class="dropdown-link">ноутбуки</a>
-                        <a href="#" class="dropdown-link">радио</a>
-                        <a href="#" class="dropdown-link">системные блоки</a>
-                        <a href="#" class="dropdown-link">Видеокарты</a>
-                        <a href="#" class="dropdown-link">Блоки питания</a>
-                        <a href="#" class="dropdown-link">Процессоры</a>
-                    </div>
-                </li>
-
             <li><a href="/about">О нас</a></li>
-            <li><a href="#" class="dropdown-toggle" easy-toggle="#dropdown" easy-class="show" easy-rcoe>Каталог</a></li>
-
             <li><a href="/help">Помощь</a></li>
             <li><a href="/adress">Адреса</a></li>
         </ul>
@@ -46,19 +34,19 @@
                 <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
                 </select>
-                <button type="submit">Show Products</button>
+                <button type="submit">Показать категорию</button>
             </form>
         <a href="/login_page" class="callback">Авторизация</a>
         </div>
     </div>
 </nav>
-    <form action="/search" method="post" class="search-bar">
+    <div class="search-bar">
+    <form action="/search" method="post">
         <input type="text" name="query" placeholder="Введите запрос">
         <input type="submit" value="Поиск">
     </form>
+    </div>
 </header>
-<script src="https://cdn.jsdelivr.net/npm/easy-toggler@2.2.7"></script>
-
 <body>
 
 
@@ -72,7 +60,7 @@
       <h3>О компании</h3>
       <ul>
         <li><a href="/about">О магазине</a></li>
-        <li><a href="/register">Добавить</a></li>
+        <li><a href="/register">Регистрация</a></li>
         <li><a href="/create">Добавить</a></li>
         <li><a href="#">Политика конфиденциальности</a></li>
       </ul>
@@ -85,12 +73,12 @@
       <ul class="social-media-icons">
         <li>VK: <a href="https://vk.com/kiber_pechenie">https://vk.com/kiber_pechenie<i class="fab fa-facebook-f"></i></a></li>
         <li>Почта: <a href="#">timyrbylat0309@gmail.com<i class="fab fa-twitter"></i></a></li>
-        <li>Номер: <a href="#">85-85-90<i class="fab fa-instagram"></i></a></li>
+        <li>Номер: <a href="#">85-85-90<i class="fab fa-twitter"></i></a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2022 Компания продажи компьютерной техники. Все права защищены.</p>
+    <p>&copy; 2024 Компания продажи компьютерной техники. Все права защищены.</p>
   </div>
 </footer>
 

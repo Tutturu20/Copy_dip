@@ -1,8 +1,25 @@
-.search-bar{
-margin: 10px 10px;
+.search-bar form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.class1 {
-font-size: 20px;
-color: black;
+.search-bar form input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.search-bar form input[type="submit"] {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar form input[type="submit"]:hover {
+    background-color: #0056b3;
 }
