@@ -44,8 +44,8 @@ class Orders(db.Model):
     name_buyer = db.Column(db.String(128), nullable=False)
     number_b = db.Column(db.String(50), nullable=False)
     mail_buyer = db.Column(db.String(128), nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('items.id'), nullable=False)
+    item = db.relationship('Items', backref='orders')
 
     def __repr__(self):
         return self
@@ -92,10 +92,6 @@ def login_page():
             login_user(user)
 
             return redirect('/')
-        else:
-            flash('Неправильно введен логин или пароль')
-    else:
-        flash('Введите логин и пароль')
     return render_template('login_page.html')
 
 @app.route('/create', methods=['POST', 'GET'])
@@ -173,26 +169,6 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/submit_order', methods=['POST', 'GET'])
-@login_required
-def submit_order():
-    if request.method == "POST":
-        name_buyer = request.form['name_buyer']
-        number_b = request.form['number_b']
-        mail_buyer = request.form['mail_buyer']
-
-        order = Orders(name_buyer=name_buyer, number_b=number_b, mail_buyer=mail_buyer)
-
-        try:
-            db.session.add(order)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "ошибка"
-    else:
-        return render_template('submit_order.html')
-
-
 @app.route('/help', methods=['POST', 'GET'])
 def help():
     if request.method == "POST":
@@ -220,6 +196,33 @@ def search():
     results = Items.query.filter(Items.title.ilike(f"%{query}%")).all()
     categories = Category.query.all()
     return render_template("search.html", results=results,categories=categories)
+
+
+#@app.route('/buy/)
+#def buy(product_id):
+ #   product_name = Items.get(product_id, "Товар не найден")
+ #   return redirect('/submit_order.html', product=product_name)
+
+
+@app.route('/submit_order/<int:product_id>', methods=['POST', 'GET'])
+@login_required
+def submit_order(product_id):
+    if request.method == "POST":
+        name_buyer = request.form['name_buyer']
+        number_b = request.form['number_b']
+        mail_buyer = request.form['mail_buyer']
+
+        order = Orders(name_buyer=name_buyer, number_b=number_b, mail_buyer=mail_buyer, item_id=product_id)
+
+        try:
+            db.session.add(order)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "ошибка"
+    else:
+        product_name = Items.query.get(product_id)
+        return render_template('submit_order.html', product_name=product_name)
 
 
 if __name__ == '__main__':

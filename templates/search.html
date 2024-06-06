@@ -10,8 +10,8 @@
         <div class="album py-5 bg-body-tertiary">
             <div class="container mt-5">
                 <div class="row">
-                    {% for product in results %}
                         <div class="row">
+                            {% for product in results %}
                                 <div class="col-md-4">
                                     <div class="product">
                                         <div class="image">
@@ -21,7 +21,7 @@
                                             <h3>{{ product.title }}</h3>
                                             <div class="info-price">
                                                 <span class="price">{{ product.price }} <small>руб.</small></span>
-                                                <a href="/submit_order" class="buy-item">купить</a>
+                                                <a href="/submit_order/{{ product.id }}" class="buy-item">купить</a>
                                             </div>
                                         </div>
                                     </div>
